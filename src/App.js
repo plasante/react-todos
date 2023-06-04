@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import './App.css';
 import TodoTable from './components/TodoTable';
@@ -6,6 +6,8 @@ import NewTodoForm from './components/NewTodoForm';
 
 
 function App() {
+
+  const [showAddTodoForm, setShowAddTodoForm] = useState(false);
 
   const [todos, setTodos] = useState([
     { rowNumber: 1, rowDescription: 'Feed puppy', rowAssigned: 'User One' },
@@ -23,12 +25,12 @@ function App() {
     } else {
       rowNumber = 1;
     }
-      const newTodo = {
-        rowNumber: rowNumber,
-        rowDescription: description,
-        rowAssigned: assigned
-      };
-      setTodos(todos => [...todos, newTodo]);
+    const newTodo = {
+      rowNumber: rowNumber,
+      rowDescription: description,
+      rowAssigned: assigned
+    };
+    setTodos(todos => [...todos, newTodo]);
   }
 
   const deleteTodo = (deleteTodoRowNumber) => {
@@ -46,10 +48,12 @@ function App() {
         </div>
         <div className='card-body'>
           <TodoTable todos={todos} deleteTodo={deleteTodo} />
-          <button className='btn btn-primary'>
-            Add new todo
+          <button className='btn btn-primary' onClick={() => setShowAddTodoForm(!showAddTodoForm)}>
+            {showAddTodoForm ? 'Close New Todo' : 'New Todo'}
           </button>
-          <NewTodoForm addTodo={addTodo} />
+          {showAddTodoForm &&
+            <NewTodoForm addTodo={addTodo} />
+          }
         </div>
       </div>
     </div>
