@@ -34,8 +34,8 @@ function App() {
   }
 
   const deleteTodo = (deleteTodoRowNumber) => {
-    let filtered = todos.filter(function (value) {
-      return value.rowNumber !== deleteTodoRowNumber;
+    let filtered = todos.filter(function (todo) {
+      return todo.rowNumber !== deleteTodoRowNumber;
     });
     setTodos(filtered);
   }
